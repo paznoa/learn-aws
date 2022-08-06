@@ -3,7 +3,7 @@ import boto3, json, decimal
 import time
 
 from botocore.exceptions import ClientError
-from boto3.dynamodb.types import TypeSerializer
+
 
 def insert_record(dynamodb,i_table_name,i_attribute_not_exist,i_item):
     table = dynamodb.Table(i_table_name)
@@ -27,7 +27,7 @@ def insert_record(dynamodb,i_table_name,i_attribute_not_exist,i_item):
 
 def main():
     dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000/')
-    serializer = TypeSerializer()
+    
     expDate = int(time.time())
     input_item = {"id": "b33332244442ar" , "createdAt": "2343","expDate":expDate }
    
