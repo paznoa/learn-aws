@@ -4,7 +4,7 @@ run DnamoDB container
 ```
 docker run amazon/dynamodb-local:latest  
 ```
-
+[Deploying DynamoDB locally on your computer](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html)
 ## instsll aws CLI  
 C:\Users\noapa>aws dynamodb list-tables --endpoint-url http://localhost:8000
 
