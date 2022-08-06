@@ -22,12 +22,16 @@ table = dynamodb.Table('MyTableName')
 try:
     response = table.put_item(
        Item={
-            'id': "123",
+            'id': "paz12",
+            'createdAt': "123"
            
-        }
+        },
+       ConditionExpression='attribute_not_exists(id)'
+
     )
 except ClientError as e:
     print(e.response['Error']['Message'])
 else:
     print("PutItem succeeded:")
+
     print(json.dumps(response, indent=4, cls=DecimalEncoder))
