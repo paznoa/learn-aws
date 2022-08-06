@@ -16,13 +16,13 @@ class DecimalEncoder(json.JSONEncoder):
 dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000/')
 
 
-table = dynamodb.Table('noa')
+table = dynamodb.Table('MyTableName')
 
 #Insert new user data into the system
 try:
     response = table.put_item(
        Item={
-            'name': "mytest2",
+            'id': "123",
            
         }
     )
