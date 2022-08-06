@@ -24,7 +24,13 @@ Default output format [None]:
 
 ```
 aws dynamodb list-tables --endpoint-url http://localhost:8000 
-aws dynamodb create-table --table-name MyTableName  --attribute-definitions  AttributeName=id,AttributeType=S AttributeName=createdAt,AttributeType=S  AttributeName=id,KeyType=HASH  --key-schema   --endpoint-url http://localhost:8000
+```
+
+Create table: 
+```
+aws dynamodb create-table --table-name MyTableName  --attribute-definitions  AttributeName=id,AttributeType=S AttributeName=createdAt,AttributeType=S  --key-schema AttributeName=id,KeyType=HASH  AttributeName=createdAt,KeyType=RANGE    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000
+
+```
 aws dynamodb scan --table-name MyTableName --endpoint-url http://localhost:8000
 aws dynamodb describe-table  --table-name MyTableName  --endpoint-url http://localhost:8000
 ```
