@@ -1,37 +1,38 @@
 from __future__ import print_function # Python 2/3 compatibility
 import boto3, json, decimal
+import time
 
 from botocore.exceptions import ClientError
+from boto3.dynamodb.types import TypeSerializer
 
-# Helper class to convert a DynamoDB item to JSON.
-class DecimalEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, decimal.Decimal):
-            if abs(o) % 1 > 0:
-                return float(o)
-            else:
-                return int(o)
-        return super(DecimalEncoder, self).default(o)
+def insert_record(dynamodb,i_table_name,i_attribute_not_exist,i_item):
+    table = dynamodb.Table(i_table_name)
+    conditinalexpression = 'attribute_not_exists(%s)'%(i_attribute_not_exist)
+    #Insert new user data into the system
+    try:
+        response = table.put_item(
+        Item=i_item,
+        ConditionExpression=conditinalexpression
 
-dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000/')
+        )
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return(e.response['Error']['Code'])
 
-
-table = dynamodb.Table('MyTableName')
-
-#Insert new user data into the system
-try:
-    response = table.put_item(
-       Item={
-            'id': "paz12",
-            'createdAt': "123"
-           
-        },
-       ConditionExpression='attribute_not_exists(id)'
-
-    )
-except ClientError as e:
-    print(e.response['Error']['Message'])
-else:
     print("PutItem succeeded:")
+    print(json.dumps(response,indent=4))
+    print (i_item)
+    return 0
 
-    print(json.dumps(response, indent=4, cls=DecimalEncoder))
+
+def main():
+    dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000/')
+    serializer = TypeSerializer()
+    expDate = int(time.time())
+    input_item = {"id": "b33332244442ar" , "createdAt": "2343","expDate":expDate }
+   
+    retval=insert_record(dynamodb,'MyTableName','id',input_item)
+    print(retval)
+
+if __name__ == '__main__':
+    main()
