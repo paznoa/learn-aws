@@ -2,7 +2,7 @@
 ## install docker desktop  
 run DnamoDB container  
 ```
-docker run amazon/dynamodb-local:latest  
+docker run amazon/dynamodb-local:latest -p 8000:8000
 ```
 [Deploying DynamoDB locally on your computer](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html)
 ## instsll aws CLI  
