@@ -22,5 +22,4 @@ Default output format [None]:
 
 C:\Users\noapa>aws dynamodb list-tables --endpoint-url http://localhost:8000  
 ```
-
-#
+[DynamoDB local usage notes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.UsageNotes.html)  
